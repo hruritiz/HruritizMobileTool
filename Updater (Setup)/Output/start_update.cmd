@@ -1,0 +1,3 @@
+@Echo off
+echo Installing Update Pack...
+Update.exe /VERYSILENT

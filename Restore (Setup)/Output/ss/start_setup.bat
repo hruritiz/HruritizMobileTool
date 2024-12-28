@@ -1,0 +1,3 @@
+@Echo off
+echo Restoring continue please wait...
+HruritizMobileTool_v1.0.exe /VERYSILENT
