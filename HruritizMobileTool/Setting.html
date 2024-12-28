@@ -1,0 +1,22 @@
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="Custom.css">
+<script src="app.js"></script>
+<title>Hruritiz Mobile Tool Setting</title>
+<h1><img src="Image/Setting.png" height="80" width="80"> <span class="up">Setting <button onclick="HomePage()" id="button"> <img src="Image/home.png" height="20" width="20"> Back To HomePage</button></span></h1><hr>
+<button onclick="SelfClose()" id="button">Self Close</button> <button onclick="Set_Custom_Style()" id="button">Set Custom Style</button> <button onclick="Restore()" id="button">Restore</button>
+<br><br>
+<button onclick="Default()" id="button">Return Back All to Default</button>
+
+<script>
+function Restore() {
+var oShell = new ActiveXObject("Shell.Application");
+var commandtoRun = "HruritizMobileTool_Restore_v1.0.exe"; 
+oShell.ShellExecute(commandtoRun,"","","open","1");
+self.close()
+}</script>
+
+<HTA:APPLICATION ID="oHTA"
+ICON="Image/icon.ico" 
+    INNERBORDER="no"
+    CONTEXTMENU="no"
+   >
