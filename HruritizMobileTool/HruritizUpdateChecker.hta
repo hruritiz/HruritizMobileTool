@@ -1,39 +1,27 @@
-    <title>Hruritiz Update Checker</title>
-    <HTA:APPLICATION APPLICATIONNAME="Hruritiz Update Checker"BORDER="none"SCROLL="no"SINGLEINSTANCE="no"SYSMENU="no"WINDOWSTATE="minimize"ICON="Image/update_icon.ico"/>
-    <script type="text/javascript">
-    var updateUrl = "https://update-hruritizmobiletool.netlify.app/1.0-1.1/Update.exe";
-
-        function checkForUpdate() {
-            var xhr = new XMLHttpRequest();
-            xhr.open('HEAD', updateUrl, false);
-            xhr.send();
-            return xhr.status === 200;
-        }
-        function showUpdateDialog() {
-       var WScript = new ActiveXObject("WScript.Shell");
-       WScript.Run('notifu.exe /p "HruritizMobileTool" /m "New Update is available!" /i "Image/update_icon.ico" /t info');
-            if (confirm("New update is available. Do you want to update now?")) {
-                runUpdater();
-            } else {
-                window.close();
-            }
-        }
-        function runUpdater() {
-            try {
-                var shell = new ActiveXObject("WScript.Shell");
-                var updaterPath = "HruritizMobileTool_Updater_v1.0.exe /silent";
-                shell.Run(updaterPath, 1, false);
-                 window.close();
-            } catch (e) {
-                alert("Missing HruritizMobileTool Updater (Please Install Updater)" + e.message);
-                 window.close();
-            }
-        }
-        window.onload = function () {
-            if (checkForUpdate()) {
-                showUpdateDialog();
-            } else {
-                 window.close();
-            }
-        };
-    </script>
+<title>HruritizMobileTool Updater</title>
+<HTA:APPLICATION APPLICATIONNAME="HruritizMobileTool Updater"BORDER="none"SCROLL="no"SINGLEINSTANCE="no"SYSMENU="no"WINDOWSTATE="minimize"ICON="Image/update_icon.ico"/>
+<script type="text/javascript">
+var updateUrl = "https://update-hruritizmobiletool.netlify.app/1.0-1.1/Update.exe";
+var verifyUrl = "https://update-hruritizmobiletool.netlify.app/verify.md";
+function checkUrl(url) {
+var xhr = new XMLHttpRequest();
+xhr.open('HEAD', url, false);xhr.send();return xhr.status;}
+function showUpdateDialog() {
+var WScript = new ActiveXObject("WScript.Shell");
+WScript.Run('notifu.exe /p "HruritizMobileTool" /m "New Update is available!" /i "Image/update_icon.ico" /t info');
+if(confirm("New update is available. Do you want to update now?")) {
+runUpdater();}else {window.close();}}
+function runUpdater() {try {var shell = new ActiveXObject("WScript.Shell");
+var updaterPath = "HruritizMobileTool_Updater_v1.0.exe";shell.Run(updaterPath, 1, false);window.close();}
+catch(e) {alert("Missing HruritizMobileTool Updater (Please Install Updater)" + e.message);window.close();}}
+function url(url) {try {
+var shell = new ActiveXObject("WScript.Shell");
+shell.Run('cmd.exe /c start "" "' + url + '"', 1, false);
+}catch(e) {window.location.href = "https://hruritiz.blogspot.com/";
+}}window.onload = function() {
+var verifyStatus = checkUrl(verifyUrl);
+if(verifyStatus === 200) {
+if(checkUrl(updateUrl) === 200) {
+showUpdateDialog();}}else if(verifyStatus === 404) {
+if(confirm('A validation error may indicate that HruritizMobileTool has been removed from the servers (click "OK" to go to the site to learn more)')) {
+url("https://hruritiz.blogspot.com/");}}window.close();};</script>
