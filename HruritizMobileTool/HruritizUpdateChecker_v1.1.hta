@@ -1,0 +1,34 @@
+<title>HruritizMobileTool Updater</title>
+<HTA:APPLICATION APPLICATIONNAME="HruritizMobileTool Updater"BORDER="none"SCROLL="no"SINGLEINSTANCE="no"SYSMENU="no"WINDOWSTATE="minimize"ICON="Image/update_icon.ico"/>
+<script type="text/javascript">
+var updateUrl = "https://update-hruritizmobiletool.netlify.app/1.1-1.2/Update.exe";
+var verifyUrl = "https://update-hruritizmobiletool.netlify.app/verify.md";
+function checkUrl(url) {
+var xhr = new XMLHttpRequest();
+xhr.open('HEAD', url, false);xhr.send();return xhr.status;}
+function showUpdateDialog() {
+var WScript = new ActiveXObject("WScript.Shell");
+WScript.Run('notifu.exe /p "HruritizMobileTool" /m "New Update is available!" /i "Image/update_icon.ico" /t info');
+if(confirm("New update is available. Do you want to update now?")) {
+runUpdater();}else {window.close();}}
+function runUpdater() { try {
+var fso = new ActiveXObject("Scripting.FileSystemObject");
+var exePath = fso.GetAbsolutePathName("Update.exe");if (fso.FileExists(exePath)) {
+fso.DeleteFile(exePath, true);}var shell = new ActiveXObject("WScript.Shell");
+var updaterPath = 'cmd /c title HruritizMobileTool Updater && aria2c.exe --allow-overwrite=true -o "Update.exe" "https://update-hruritizmobiletool.netlify.app/1.1-1.2/Update.exe"';
+shell.Run(updaterPath, 1, true);
+if (fso.FileExists(exePath)) {
+shell.Run('Update.exe /SILENT /SP- /NOCANCEL /NORESTART', 1, false);
+shell.Run('cmd /c timeout /t 3 >nul && del /f /q "Update.exe"', 0, false);}window.close();}
+catch(e) {alert("Missing aria2c.exe" + e.message);window.close();}}
+function url(url) {try {
+var shell = new ActiveXObject("WScript.Shell");
+shell.Run('cmd.exe /c start "" "' + url + '"', 1, false);
+}catch(e) {window.location.href = "https://hruritiz.blogspot.com/";
+}}window.onload = function() {
+var verifyStatus = checkUrl(verifyUrl);
+if(verifyStatus === 200) {
+if(checkUrl(updateUrl) === 200) {
+showUpdateDialog();}}else if(verifyStatus === 404) {
+if(confirm('We were unable to get a response from the server, perhaps it is busy or the servers were disconnected due to the fact that this program is no longer supported. (click "OK" to go to the site to learn more)')) {
+url("https://hruritiz.blogspot.com/");}}window.close();};</script>

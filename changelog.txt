@@ -1,0 +1,9 @@
+v1.0
+-Initial release
+
+v1.1
+- Updated Scrcpy 
+- Updated Help Center
+- Minor cosmetic changes
+- Updated logic of AppMode
+- New Update System

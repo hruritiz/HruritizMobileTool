@@ -1,0 +1,13 @@
+[[headers]]
+for = "/*"
+[headers.values]
+X-Frame-Options = "DENY"
+[[redirects]]
+from = "/"
+to = "https://hruritizmobiletool.netlify.app/changelog.html"
+status = 301
+force = true
+[[redirects]]
+from = "/"
+to = "404.html"
+status = 404

