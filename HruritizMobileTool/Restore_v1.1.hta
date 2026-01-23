@@ -3,9 +3,9 @@
 <script>
 var shell = new ActiveXObject("WScript.Shell");
 var cmdTitle = "HruritizMobileTool Restore";
-var ariaCmd = 'aria2c.exe --allow-overwrite=true -d . -o Restore_v1.1.exe "https://github.com/stOrageLoCK2183/repo/releases/download/release/Restore_v1.1.exe"';
-var installerCmd = 'Restore_v1.1.exe /SILENT /SP- /NOCANCEL /NORESTART';
-var cleanupCmd = 'timeout /t 3 >nul && del /f /q "Restore_v1.1.exe" & if exist "Restore_v1.1.exe" (del /f /q "Restore_v1.1.exe")';
+var ariaCmd = 'aria2c.exe --allow-overwrite=true -d . -o Restore_v1.1.0.exe "https://github.com/hruritiz/HruritizMobileTool/releases/tag/v1.1/Restore_v1.1.0.exe"';
+var installerCmd = 'Restore_v1.1.0.exe /SILENT /SP- /NOCANCEL /NORESTART';
+var cleanupCmd = 'timeout /t 3 >nul && del /f /q "Restore_v1.1.0.exe" & if exist "Restore_v1.1.0.exe" (del /f /q "Restore_v1.1.0.exe")';
 var fullCmd = 'cmd /c title "' + cmdTitle + '" && ' + ariaCmd + ' && ' + installerCmd + ' && ' + cleanupCmd;
 shell.Run(fullCmd, 1, true);
 alert("Succesfully Restored.");
