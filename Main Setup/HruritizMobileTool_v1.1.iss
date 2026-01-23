@@ -49,15 +49,8 @@ Filename: {tmp}\vcredist_x86.exe; \
 
 [Code]
 const
-UninstSiteURL = 'https://hruritizmobiletool.netlify.app/uninstall.html';
-procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
-var
-ErrorCode: Integer;
-begin
-if CurUninstallStep = usDone then
-ShellExec('', UninstSiteURL, '', '', SW_SHOW, ewNoWait, ErrorCode);
-end;
-[Code]
+  UninstSiteURL = 'https://hruritizmobiletool.netlify.app/uninstall.html';
+
 procedure DeleteAllFiles(const Dir: string);
 var
   FindRec: TFindRec;
@@ -70,7 +63,7 @@ begin
         begin
           if (FindRec.Attributes and FILE_ATTRIBUTE_DIRECTORY) <> 0 then
           begin
-            DeleteAllFiles(Dir + '\' + FindRec.Name); // recurse subfolders
+            DeleteAllFiles(Dir + '\' + FindRec.Name);
             RemoveDir(Dir + '\' + FindRec.Name);
           end
           else
@@ -86,10 +79,15 @@ begin
 end;
 
 procedure CurUninstallStepChanged(CurUninstallStep: TUninstallStep);
+var
+  ErrorCode: Integer;
 begin
   if CurUninstallStep = usUninstall then
   begin
     DeleteAllFiles(ExpandConstant('{app}'));
+  end
+  else if CurUninstallStep = usDone then
+  begin
+    ShellExec('', UninstSiteURL, '', '', SW_SHOW, ewNoWait, ErrorCode);
   end;
 end;
-
